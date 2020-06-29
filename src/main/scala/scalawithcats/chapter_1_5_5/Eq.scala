@@ -9,9 +9,14 @@ final case class Cat(name: String, age: Int, color: String)
 
 object Cat {
 
+  import cats.instances.int._ // for Eq
+  import cats.instances.string._ // for Eq
+
   implicit val catEq: Eq[Cat] = Eq.instance[Cat] {
     (cat1, cat2) =>
-      cat1.name == cat2.name && cat1.age == cat2.age && cat1.color == cat2.color
+      cat1.name === cat2.name &&
+        cat1.age === cat2.age &&
+        cat1.color === cat2.color
   }
 
 }
